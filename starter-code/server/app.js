@@ -37,7 +37,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', authController);
+app.use('/api', authController);
 app.all('/*', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
