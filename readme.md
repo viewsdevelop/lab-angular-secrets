@@ -7,7 +7,7 @@
 After this lesson, you will be able to:
 
 - Create an API that will serve contents from a database to an Angular app.
-- Create an Angular application that will use an API to send and receive information from your Mongo Database.
+- Create an angular application that will use an API to send and receive information form a Mongo Database.
 
 ## Requirements
 
@@ -30,178 +30,140 @@ In the Pull Request name, add your campus, name, and last name separated by a da
 
 ## Deliverables
 
-In this lesson you have to deliver two different folders: the server API and the client. You can have both the client and server in the same folder so you only submit one repo.
+In this lesson you have to deliver two different projects: the server API and the client. You can add the client folder in the server folder to keep both in the same repo.
 
 ## Introduction
 
-We all have secrets, but sometimes we would like to tell our secrets to a reliable source that will keep them between us. We are going to build an application that will allow us to store our biggest secret.
+We all have secrets, but sometimes we would like to tell this secrets to a reliable source that will keep them between us. We are going to build an application that will allow us to store our biggest secret.
 
-## Starter Code Structure
+### Starter code
 
-In the repo you have forked, we provide you starter code. This code has the main structure for the API and the Client app you are going to build.
+In the repo you have forked, we provide you an starter code. This code has the main structure for the API and the Client app you are going to build.
 
 We have already generated and added all the packages you will need to start working in your API. The folder structure is the following:
 
 ```
-└── starter-code
-    ├── authentication-app
-    │   ├── README.md
-    │   ├── angular-cli.json
-    │   ├── e2e
-    │   │   ├── app.e2e-spec.ts
-    │   │   ├── app.po.ts
-    │   │   └── tsconfig.json
-    │   ├── karma.conf.js
-    │   ├── package.json
-    │   ├── protractor.conf.js
-    │   ├── src
-    │   │   ├── app
-    │   │   │   ├── app.component.css
-    │   │   │   ├── app.component.html
-    │   │   │   ├── app.component.ts
-    │   │   │   ├── app.module.ts
-    │   │   │   ├── auth-login
-    │   │   │   │   ├── auth-login.component.css
-    │   │   │   │   ├── auth-login.component.html
-    │   │   │   │   └── auth-login.component.ts
-    │   │   │   ├── auth-signup
-    │   │   │   │   ├── auth-signup.component.css
-    │   │   │   │   ├── auth-signup.component.html
-    │   │   │   │   └── auth-signup.component.ts
-    │   │   │   ├── my-private-page
-    │   │   │   │   ├── my-private-page.component.css
-    │   │   │   │   ├── my-private-page.component.html
-    │   │   │   │   └── my-private-page.component.ts
-    │   │   │   └── session.service.ts
-    │   │   ├── assets
-    │   │   ├── environments
-    │   │   │   ├── environment.prod.ts
-    │   │   │   └── environment.ts
-    │   │   ├── favicon.ico
-    │   │   ├── index.html
-    │   │   ├── main.ts
-    │   │   ├── polyfills.ts
-    │   │   ├── styles.css
-    │   │   ├── test.ts
-    │   │   └── tsconfig.json
-    │   └── tslint.json
-    └── server
-        ├── app.js
-        ├── bin
-        │   └── www
-        ├── config
-        │   └── passport.js
-        ├── models
-        │   └── user.js
-        ├── package.json
-        ├── public
-        └── routes
-            └── authController.js
+starter-code/
+├── authentication-app
+│   └── src
+│       └── app
+│       │   ├── app.component.css
+│       │   ├── app.component.html
+│       │   ├── app.component.ts
+│       │   └── app.module.ts
+│       └── auth-login
+│       │       ├── auth-login.component.css
+│       │       ├── auth-login.component.html
+│       │       └── auth-login.component.ts
+│       └── signup-login
+│       │       ├── auth-signup.component.css
+│       │       ├── auth-signup.component.html
+│       │       └── auth-signup.component.ts
+│       └── my-private-page
+│       │       ├── my-private-page.component.css
+│       │       ├── my-private-page.component.html
+│       │       └── my-private-page.component.ts
+│       └── session-service.ts
+├── .gitignore
+├── app.js
+├── bin
+│   └── www
+├── configs
+│   └── passport.js
+├── models
+│   └── user.js
+├── package.json
+├── public
+└── routes
 ```
 
-As you can see, the project has an `authentication-app` folder where you will find all the necessary files to create your angular app. It already has all the components and services created. The server folder has the structure to create the API that will use the Angular app.
+As you can see, the project has an `authentication-app` folder where you will find all the necessary files to create your angular app. It already has all the components and service created. On the other hand, the main folder has the structure to create the API that will use the Angular app.
 
-## API
+### API
 
-We've created the starter code for the API already. We'd like to focus on Angular only, but let's first detail the API.
+The first thing we have to create is the API. **Remember to install all the packages before start coding.**
 
-### Data Model
+#### Iteration 1: User Model
 
-`username` (String) - User's username for authentication.
-`password` (String) - Encrypted with bcrypt, we will use it with the username to authenticate the user.
-`name` (String) - User's full name
-`secret` (String) - A super top secret detail about the user that only they will be able to see.
+The User model will have the following fields:
 
-### Routes
+- `username`, string. We will use it to login.
+- `password`, string. Encrypted with `bcrypt`, we will use it with the username to authenticate the user.
+- `name`, string. It will store the user full name.
+- `secret`, string. In this field, we will store our biggest secret.
 
-#### POST /api/signup
+Remember to add the timestamps `createdAt` and `updatedAt` to the model, to store the values.
 
-**Parameters**
+You have to add the code into the `models/user.js` file to generate your model.
 
-`username` (String)
-`password` (String)
-`name` (String)
-`secret` (String)
+**Tasks**
 
-**Return Values**
+Create the model in the `model/user.js` file, with the following fields:
 
-- **Username exists** - Status `400`
-- **Server error** - Status `500`
-- **Success** - Status `200`, and the created `user` object
+- `username`
+- `password`
+- `name`
+- `secret`
+- `createdAt`
+- `updatedAt`
 
-#### POST /api/login
+#### Iteration 2: Passport Configuration
 
-**Parameters**
+The following step is to configure Passport.js to use the Local Strategy to authenticate users. You can find the functions you have to complete in the `config/passport.js` file. Remember we will use this service from our Client app.
 
-`username` (String)
-`password` (String)
+**Tasks**
 
-**Return Values**
+Add the necessary code to configure Passport.js, by completing the following functions:
 
-- **Error logging in** - Status `401`
-- **User doesn't exist** - Status `501`
-- **Database error** - Status `500`
-- **Success** - Status `200`, and the logged in `user`
+- `passport.use()`
+- `passport.serializeUser()`
+- `passport.deserializeUser()`
 
-#### POST /api/loggedin
+#### Iteration 3: Controller Implementation
 
-**Parameters**
+To finish up with our API, we have to create the different routes we will call from the client. You can find the routes in the `routes/authController.js`. We have already generated the main structure of your routes, you just have to create the code.
 
-*None*
+The controller contains the following methods:
 
-**Return Values**
+- `POST /signup`, that will receive the user information to signup in our application. **Once we have stored the information in the database, we have to automatically login the user with the `req.login` method.**
+- `POST /login`, that will receive the username and the password, and start a session if the data is correct. If the data is incorrect, it has to throw an exception.
+- `POST /logout`, that will finish the user session.
 
-- **User was previously logged in** - Status `200`, and the previously logged in user
-- **User was *not* previously logged in** - Status `403`
+**Note:** You are creating an API. Remember to return not just the data, but also the Status Code that corresponds to the action that the user has done.
 
-#### POST /api/logout
+You can check out the different status codes you can return in the [Status Cats API website](https://http.cat/).
 
-**Parameters**
+**Tasks**
 
-*None*
+Generate the necessary code to implement your API in the `routes/authController.js` file:
 
-**Return Values**
+- `POST /signup`.
+- `POST /login`.
+- `POST /logout`.
 
-- Logs the user out and returns Status `200`
+### Client
 
-#### GET /api/private
+Once we have done all the API, we can start coding the client. Remember that you will have to generate the necessary files with `$ ng build --prod` and add all the generated files in the `authentication-app/build` folder to the `/public` folder of the server.
 
-**Parameters**
+#### Iteration 4: Session Service
 
-*None*
+The first thing we will do is the service that we will use to call our API methods. You have to change the file in `authentication-app/src/app/session.service.ts` file. We will need to store the **current user in a variable** inside the service.
 
-**Return Values**
+We will have to create different methods to call they homonymous in the API. We need to create the following methods:
 
-- **User is logged in** - Returns the logged in user's secret and Status 200
-- **User is *not* logged in** - Returns Status `403` and an error message
-
-:::warning
-:exclamation: Remember to run the express server with `$ bin/www` before continuing.
-:::
-
-## Client
-
-Since our API is already complete, we can start coding the client. Remember that you will have to generate the necessary files with `$ ng build --prod` and add all the generated files in the `authentication-app/build` folder to the `/public` folder of the server.
-
-#### Iteration 1: Session Service
-
-The first thing we will do is the service that we will use to retrieve data from our API. You will be working in `authentication-app/src/app/session.service.ts`. We will need to store the **current user in a variable** inside the service.
-
-We will have to create different methods to call the corresponding API routes:
-
-- `signup()`, that will receive as a parameter the user data that will be stored in the database. If the information is correct, we will assign the user session to the `currentUser` variable we have to defined in the service.
-- `login()`, that will receive the username and password to check  if the credentials are correct and they can start a session. Once the session starts, we have to store the current user in the `currentUser` variable.
-- `isLogged()` will return if there is a user logged in or not. We will use the `currentUser` variable in the session service to do that.
+- `signup()`, that will receive as a parameter the user data that will be stored in the database. If the information is correct, we will assign the user session to the `user` variable we have to define.
+- `login()`, that will receive the username and password to check out if the credentials are correct and he can start a session. Once the session starts, we have to store the current user in the `user` variable.
+- `isLogged()` will return if there is a user logged in or not. We will use the `user` variable in the session to do that.
 - `logout()` will finish the session, and remove the current user information from the variable in the service.
 - `handleError()` will receive an error as a parameter and return an Observable with the message of the error.
 
-Once we have done all this, we will have the service correctly implemented.
+Once we have done all this, we will have all the service correctly implemented.
 
 **Tasks**
 
 Create the necessary code to create a service that we will call the methods we have defined in the API and that we will use in the app. We have to:
 
-- Create a `currentUser` variable to store the current user information.
+- Create a `user` variable to store the current user information.
 - Generate the code of the following functions described above:
   - `handleError()`
   - `signup()`
@@ -209,7 +171,7 @@ Create the necessary code to create a service that we will call the methods we h
   - `isLogged()`
   - `logout()`
 
-#### Iteration 2: Routes
+#### Iteration 5: Routes
 
 The following step in our process is to generate the routes that we will use to show the different components. We will have three different routes:
 
@@ -230,7 +192,7 @@ Change the `authentication-app/src/app/app.module.ts` file to add the routes, by
   - `private`, that will render `MyPrivatePageComponent`.
 - Add the array to the `imports` section in the file.
 
-#### Iteration 3: App Component
+#### Iteration 6: App Component
 
 The `app.component` will be super simple. It will have two links (`login` and `signup`) if the user is not logged in, and a button (`logout`) if the user is logged in. You should use an `ngIf` directive to do that. You also have to style the page.
 
@@ -245,13 +207,13 @@ Change the `app.component.html` and `app.component.ts` files to do the following
   - `signup`, that will render `AuthSignupComponent`.
 - If a user is logged in, show a button to `logout`.
 
-#### Iteration 4: Signup Component
+#### Iteration 7: Signup Component
 
 Once the user is in the `/signup` page, we have to show him a form that will allow to create a new account in the database. We have defined our model with four different fields: `username`, `password`, `name`, and `secret`.
 
 We are saving our secret, so we don't want people to see what it is about while signing up. Use a `password` input field in the form.
 
-When we click on the `Signup` button, we have to use the service we did in previous iterations to store the user information in the database.
+When we click on the `Signup` button, we have to use the service we did in the **Iteration 4** to store the user information in the database.
 
 ![](https://s3-eu-west-1.amazonaws.com/ih-materials/uploads/upload_a8ca6abdc244a6b1df0fdbe5676de00f.png)
 
@@ -270,7 +232,7 @@ Create the necessary changes in the code to allow users to signup in our applica
   - `signup()` method to handle the request.
 - Once the user has signed up, we start the session automatically, so we have to redirect the user to the `/private` page.
 
-#### Iteration 5: Login Component
+#### Iteration 8: Login Component
 
 The login component has to have all the necessary fields to start a new session, so we have to create a form with username and password.
 
@@ -289,7 +251,7 @@ Again, when we click on the `Login` button, we have to use the service we did in
   - `login()` method to handle the request.
 - Once the user has logged in, we have to redirect him to the `/private` page.
 
-#### Iteration 6: Private Component
+#### Iteration 9: Private Component
 
 To finish up this exercise, we have to load the user information and show it in the page. We will basically show the user's secret. We will use the user information we have in the `Session` service we created before.
 
