@@ -44,7 +44,7 @@ We have already generated and added all the packages you will need to start work
 
 ```
 starter-code/
-├── authentication-app
+├── client
 │   └── src
 │       └── app
 │       │   ├── app.component.css
@@ -77,7 +77,7 @@ starter-code/
 └── routes
 ```
 
-As you can see, the project has an `authentication-app` folder where you will find all the necessary files to create your angular app. It already has all the components and service created. On the other hand, the main folder has the structure to create the API that will use the Angular app.
+As you can see, the project has an `client` folder where you will find all the necessary files to create your angular app. It already has all the components and service created. On the other hand, the main folder has the structure to create the API that will use the Angular app.
 
 ### API
 
@@ -143,16 +143,16 @@ Generate the necessary code to implement your API in the `routes/authController.
 
 ### Client
 
-Once we have done all the API, we can start coding the client. Remember that you will have to generate the necessary files with `$ ng build --prod` and add all the generated files in the `authentication-app/build` folder to the `/public` folder of the server.
+Once we have done all the API, we can start coding the client. Remember that you will have to generate the necessary files with `$ ng build --prod` and add all the generated files in the `client/build` folder to the `/public` folder of the server.
 
 #### Iteration 4: Session Service
 
-The first thing we will do is the service that we will use to call our API methods. You have to change the file in `authentication-app/src/app/session.service.ts` file. We will need to store the **current user in a variable** inside the service.
+The first thing we will do is the service that we will use to call our API methods. You have to change the file in `client/src/app/session.service.ts` file.
 
-We will have to create different methods to call they homonymous in the API. We need to create the following methods:
+We will have to create different methods to call the corresponding routes in the API. We need to create the following methods:
 
 - `signup()`, that will receive as a parameter the user data that will be stored in the database. If the information is correct, we will assign the user session to the `user` variable we have to define.
-- `login()`, that will receive the username and password to check out if the credentials are correct and he can start a session. Once the session starts, we have to store the current user in the `user` variable.
+- `login()`, that will receive the username and password to check out if the credentials are correct and we can start a session. Once the session starts, we have to store the current user in the `user` variable.
 - `isLogged()` will return if there is a user logged in or not. We will use the `user` variable in the session to do that.
 - `logout()` will finish the session, and remove the current user information from the variable in the service.
 - `handleError()` will receive an error as a parameter and return an Observable with the message of the error.
@@ -179,11 +179,11 @@ The following step in our process is to generate the routes that we will use to 
 - `/login`
 - `/private`
 
-The components are already in the project, so you just have to add the routes into the `authentication-app/src/app/app.module.ts` file that will render the correct component depending on the route.
+The components are already in the project, so you just have to add the routes into the `client/src/app/app.module.ts` file that will render the correct component depending on the route.
 
 **Tasks**
 
-Change the `authentication-app/src/app/app.module.ts` file to add the routes, by doing the following:
+Change the `client/src/app/app.module.ts` file to add the routes, by doing the following:
 
 - Add the `RouterModule` and `Routes` modules form `@anguler/router`.
 - Create a `Routes` array, with the following routes:
@@ -209,7 +209,7 @@ Change the `app.component.html` and `app.component.ts` files to do the following
 
 #### Iteration 7: Signup Component
 
-Once the user is in the `/signup` page, we have to show him a form that will allow to create a new account in the database. We have defined our model with four different fields: `username`, `password`, `name`, and `secret`.
+Once the user is in the `/signup` page, we have to show them a form that will allow them to create a new account in the database. We have defined our model with four different fields: `username`, `password`, `name`, and `secret`.
 
 We are saving our secret, so we don't want people to see what it is about while signing up. Use a `password` input field in the form.
 
@@ -236,7 +236,7 @@ Create the necessary changes in the code to allow users to signup in our applica
 
 The login component has to have all the necessary fields to start a new session, so we have to create a form with username and password.
 
-Again, when we click on the `Login` button, we have to use the service we did in the **Iteration 4** to recover the data form the database and check out if the login succed or not.
+Again, when we click on the `Login` button, we have to use the service we did in the **Iteration 4** to recover the data from the database and check if the login succeeded or not.
 
 ![](https://s3-eu-west-1.amazonaws.com/ih-materials/uploads/upload_7383d3d34d38e3b07cbcb12ada70cc7b.png)
 
@@ -249,13 +249,13 @@ Again, when we click on the `Login` button, we have to use the service we did in
   - `formInfo` object, to store all the information of the form.
   - `error`, to store the error it could be generated during the signup process.
   - `login()` method to handle the request.
-- Once the user has logged in, we have to redirect him to the `/private` page.
+- Once the user has logged in, we have to redirect them to the `/private` page.
 
 #### Iteration 9: Private Component
 
 To finish up this exercise, we have to load the user information and show it in the page. We will basically show the user's secret. We will use the user information we have in the `Session` service we created before.
 
-**The user have to be logged in to access this page. If he is not logged in, we have to redirect him to the login page.**
+**The user has to be logged in to access this page. If they are not logged in, we have to redirect them to the login page.**
 
 ![](https://s3-eu-west-1.amazonaws.com/ih-materials/uploads/upload_60458338000b8fc9d4d75d22cd232f5f.png)
 
@@ -263,6 +263,6 @@ To finish up this exercise, we have to load the user information and show it in 
 
 - `my-private-page.component.html` file, show the user's secret with an interpolation.
 - `my-private-page.component.ts` file, subscribe the component to the `Session` service to be able to load the user secret.
-- If the user is not logged in, redirect him to the login page when he tries to access to this page.
+- If the user is not logged in, redirect them to the login page when they try to access this page.
 
 /Happy coding!
