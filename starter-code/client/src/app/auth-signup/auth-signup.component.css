@@ -1,1 +1,26 @@
-
+label {
+    display: block;
+    margin-bottom: 3px;
+}
+  
+input {
+    box-sizing: border-box;
+    display: block;
+    font-size: 14px;
+    height: 30px;
+    margin-bottom: 20px;
+    padding: 4px;
+    width: 100%;
+}
+  
+button {
+    background: rgb(4, 39, 48);
+    border: 1px solid rgb(4, 39, 48);
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+}
