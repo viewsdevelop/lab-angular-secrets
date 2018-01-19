@@ -49,7 +49,7 @@ export class SessionService {
 
   // To Review
   login(user) {
-    return this.http.post(`\login`, user)
+    return this.http.post(`/login`, user)
       .map(res => res.json())
       .map(user => {
         this.user = user;
@@ -71,13 +71,13 @@ export class SessionService {
   // Function that will finish the session and remove the current
   // user information from the variable in the service.
 
-  // To Review
-  logout() {
-    return this.http.post(`\logout`, {})
-      .map(res = res.json())
-      .map(user => this.user = undefined)
-      .catch(this.handleError);
-  }
-  //
+  // // To Review
+  // logout() {
+  //   return this.http.post(`/logout`, {})
+  //     .map(res = res.json())
+  //     .map(user => this.user = undefined)
+  //     .catch(this.handleError);
+  // }
+  // //
 
 }

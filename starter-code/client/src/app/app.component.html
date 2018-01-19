@@ -1,3 +1,15 @@
 <section id="main">
   <h1> Secrets </h1>
+
+  <div *ngIf="!isLogged()" class="links">
+    <a [routerLink]="['login']">Login</a>
+    <a [routerLink]="['signup']">Signup</a>
+  </div>
+  <div *ngIf="isLogged()" class="links">
+    <button (click)="logout()">Logout</button>
+  </div>
+
+  <!-- Can we once again review the code below? -->
+  <router-outlet></router-outlet>
+
 </section>
