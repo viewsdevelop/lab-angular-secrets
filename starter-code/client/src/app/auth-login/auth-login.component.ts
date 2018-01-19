@@ -31,7 +31,7 @@ export class AuthLoginComponent implements OnInit {
 
   // To Review: login method to handle the request.
   login() {
-    this.sesssion.login(this.formInfo)
+    this.session.login(this.formInfo)
       .subscribe(
         (user) => { this.router.navigate(["/private"]); },
         (err) => {
