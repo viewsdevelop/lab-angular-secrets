@@ -72,12 +72,12 @@ export class SessionService {
   // user information from the variable in the service.
 
   // To Review
-  logout() {
-    return this.http.post(`/logout`, {})
-      .map(res = res.json())
-      .map(user => this.user = undefined)
-      .catch(this.handleError);
-  }
+  // logout() {
+  //   return this.http.post(`/logout`, {})
+  //     .map(res = res.json())
+  //     .map(user => this.user = undefined)
+  //     .catch(this.handleError);
+  // }
   //
 
   getPrivateData() {
