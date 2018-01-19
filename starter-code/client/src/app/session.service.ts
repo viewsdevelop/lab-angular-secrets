@@ -32,7 +32,7 @@ export class SessionService {
 
   // To Review
   signup(user) {
-    return this.http.post(`/signup`, user)
+    return this.http.post(`/api/signup`, user)
       .map(res => res.json())
       .map(user => {
         this.user = user;
@@ -49,7 +49,7 @@ export class SessionService {
 
   // To Review
   login(user) {
-    return this.http.post(`/login`, user)
+    return this.http.post(`/api/login`, user)
       .map(res => res.json())
       .map(user => {
         this.user = user;
@@ -72,16 +72,16 @@ export class SessionService {
   // user information from the variable in the service.
 
   // To Review
-  // logout() {
-  //   return this.http.post(`/logout`, {})
-  //     .map(res = res.json())
-  //     .map(user => this.user = undefined)
-  //     .catch(this.handleError);
-  // }
+  logout() {
+    return this.http.post(`/api/logout`, {})
+      .map(res => res.json())
+      .map(user => this.user = undefined)
+      .catch(this.handleError);
+  }
   //
 
   getPrivateData() {
-    return this.http.get(`/private`)
+    return this.http.get(`/api/private`)
       .map(res => res.json())
       .catch(this.handleError);
   }

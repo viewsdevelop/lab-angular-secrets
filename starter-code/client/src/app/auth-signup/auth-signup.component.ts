@@ -50,6 +50,7 @@ export class AuthSignupComponent implements OnInit {
         },
         (err) => {
           this.error = err;
+          // console.log(err);
         }
       );
   }
