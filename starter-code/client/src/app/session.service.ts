@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 // To Review
-import { Http, Response } from '@angular/http'
+import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
@@ -71,13 +71,19 @@ export class SessionService {
   // Function that will finish the session and remove the current
   // user information from the variable in the service.
 
-  // // To Review
-  // logout() {
-  //   return this.http.post(`/logout`, {})
-  //     .map(res = res.json())
-  //     .map(user => this.user = undefined)
-  //     .catch(this.handleError);
-  // }
-  // //
+  // To Review
+  logout() {
+    return this.http.post(`/logout`, {})
+      .map(res = res.json())
+      .map(user => this.user = undefined)
+      .catch(this.handleError);
+  }
+  //
+
+  getPrivateData() {
+    return this.http.get(`/private`)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
 
 }

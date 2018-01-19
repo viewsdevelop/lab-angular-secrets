@@ -12,6 +12,10 @@ export class MyPrivatePageComponent implements OnInit {
 
   constructor(private session: SessionService) { }
 
+  // To Review: Subscribe the component to the Session service
+  // to be able to load the user secret.
   ngOnInit() {
+    this.username   = this.session.user.name,
+    this.secret     = this.session.user.secret;
   }
 }

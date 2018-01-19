@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: "signup", component: AuthSignupComponent },
 
   // What is MyPrivatePageComponent?
-  { path: "private", component: MyPrivatePageComponent },
+  { path: "private", component: MyPrivatePageComponent }
 ]
 
 @NgModule({
